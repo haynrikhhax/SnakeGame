@@ -14,7 +14,8 @@ public class Board extends JPanel{
     public static final int height = 600;
     public static final int size = 20;
     private Snake snake;
-    Random rn = new Random();
+    private static Color snakeColor;
+
 
     public Board() {
         this.setPreferredSize(new Dimension(width, height));
@@ -39,9 +40,10 @@ public class Board extends JPanel{
         }
 
         for (Rectangle element :snake.getSnakeBody()){
-            g2D.setColor(new Color(rn.nextInt(255), rn.nextInt(255), rn.nextInt(255)));
+            g2D.setColor(getSnakeColor());
             g2D.fill(element);
         }
+
     }
 
     public int getX() {
@@ -53,6 +55,11 @@ public class Board extends JPanel{
     public  Snake getSnake() {
         return this.snake;
     }
+    public static Color getSnakeColor() {
+        return snakeColor;
+    }
+
+
 
     public void setX(int x) {
         this.x = x;
@@ -63,4 +70,8 @@ public class Board extends JPanel{
     public void setSnake(Snake snake) {
         this.snake = snake;
     }
+    public static void setSnakeColor(Color snakeColor) {
+        Board.snakeColor = snakeColor;
+    }
+
 }

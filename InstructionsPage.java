@@ -153,12 +153,7 @@ public class InstructionsPage extends JFrame implements ActionListener {
 
         if (e.getSource() == startButton){
             dispose();
-            new Thread(){
-                @Override
-                public void run(){
-                    new Game();
-                }
-            }.start(); this.dispose();
+            ColorPicker cp = new ColorPicker();
         }
 
         if (e.getSource() == button){

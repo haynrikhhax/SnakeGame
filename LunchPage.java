@@ -67,12 +67,7 @@ public class LunchPage extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == button){
             dispose();
-            new Thread(){
-                @Override
-                public void run(){
-                    new Game();
-                }
-            }.start(); this.dispose();
+            ColorPicker cp = new ColorPicker();
         }
         if (e.getSource() == instructions){
             InstructionsPage instructionsPage = new InstructionsPage();

@@ -9,7 +9,7 @@ public class MyFrame extends JFrame{
         Container c = br;
         this.setContentPane(c);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ImageIcon image = new ImageIcon("C:\\Users\\Robert\\IdeaProjects\\SnakeGame\\src\\snake.png");
+        ImageIcon image = new ImageIcon("SnakeGame\\snake.png");
         this.setIconImage(image.getImage());
         this.setTitle("Snake");
         this.pack();
