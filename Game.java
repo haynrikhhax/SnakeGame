@@ -1,17 +1,19 @@
 package SnakeGame;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.event.*;
+import java.util.*;
 
 public class Game {
-    public static Snake sn;
-    public static Food food;
+    private static Snake snake;
+
+    static ArrayList<Food> foodList;
 
     public Game() {
-        SnakeGame.MyFrame myFrame = new SnakeGame.MyFrame();
-        sn = new Snake();
-        food = new Food(sn);
+        snake = new Snake();
+        MyFrame myFrame = new MyFrame();
+
+        int numberOfMovement = 1;
 
         myFrame.addKeyListener(new KeyListener() {
 
@@ -20,43 +22,62 @@ public class Game {
             public void keyPressed(KeyEvent e) {
                 int keyCode = e.getKeyCode();
 
-                if(keyCode == KeyEvent.VK_UP && sn.getMove() != "down") {
-                    sn.SetUp();
+                if((keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_W) && !snake.getMove().equals("down")) {
+                    snake.SetUp();
                 }
-                if(keyCode == KeyEvent.VK_DOWN && sn.getMove() != "up") {
-                    sn.SetDown();
+                if((keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_S ) && !snake.getMove().equals("up")) {
+                    snake.SetDown();
                 }
-                if(keyCode == KeyEvent.VK_LEFT && sn.getMove() != "right") {
-                    sn.SetLeft();
+                if((keyCode == KeyEvent.VK_LEFT  || keyCode == KeyEvent.VK_A) && !snake.getMove().equals("right")){
+                    snake.SetLeft();
                 }
-                if(keyCode == KeyEvent.VK_RIGHT && sn.getMove() != "left") {
-                    sn.SetRight();
+                if((keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_D) && !snake.getMove().equals("left")){
+                    snake.SetRight();
                 }
             }
             public void keyReleased(KeyEvent e) { }
         });
 
         while (true){
-            checkBorder();
-            if (touchItself()){
+            SwingUtilities.updateComponentTreeUI(myFrame);
+            if (touchItself() || snake.snakeBody.size() < 3 || snake.getSpeed() < 30){
+                new GameOverPage();
+                myFrame.dispose();
                 break;
             }
             try {
-                Thread.sleep(50);
+                Thread.sleep(snake.getSpeed());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if (sn.snakeBody.get(0).x == food.getX() && sn.snakeBody.get(0).y == food.getY()){
-                sn.growing();
-                food.foodLocation(sn);
-            }else {
-                sn.move();
+            snake.move();
+            checkBorder();
+            for (int i = 0;i<foodList.size();i++){
+                if (checkFoodEaten(foodList.get(i))) {
+                    foodList.get(i).functionality(snake);
+                    newFoodGenerator(foodList.get(i));
+                }
             }
-            SwingUtilities.updateComponentTreeUI(myFrame);
+
+
+            if (numberOfMovement % 20 == 0 && snake.getSpeed() > 40)
+                snake.setSpeed(snake.getSpeed()-1);
+            if (numberOfMovement % 100 == 0)
+                foodList.add(new HarmFood());
+            numberOfMovement++;
         }
+
     }
-    private static void checkBorder(){
-        for (Rectangle element : sn.getSnakeBody()){
+    public static void resetFood(){
+        foodList = new ArrayList<>(Arrays.asList(new GrowFood(),new GrowFood(),new GrowFood(),new HarmFood(),
+                new FastFood(),new FastFood(),new SlowFood(),new SlowFood()));
+    }
+    private boolean checkFoodEaten(Food fd){
+        return snake.snakeBody.get(0).x == fd.getX() && snake.snakeBody.get(0).y == fd.getY();
+    }
+
+    private void checkBorder(){
+        for (Rectangle element : snake.getSnakeBody()){
             if(element.x >= Board.width) {
                 element.x -= Board.width;
             }else if(element.y >= Board.height) {
@@ -70,13 +91,43 @@ public class Game {
         }
     }
 
-    private static boolean touchItself() {
-        for(int i = 1; i < sn.getSnakeBody().size(); i++) {
-            if(sn.getX() == sn.getSnakeBody().get(i).x && sn.getY() == sn.getSnakeBody().get(i).y) {
-                return true;
+    private boolean touchItself() {
+        for(int i = 0; i < snake.getSnakeBody().size()-1; i++) {
+            for (int j = i+1; j < snake.snakeBody.size(); j++){
+                if(snake.getSnakeBody().get(i).x == snake.getSnakeBody().get(j).x &&
+                        snake.getSnakeBody().get(i).y == snake.getSnakeBody().get(j).y) {
+                    return true;
+                }
             }
         }
         return false;
     }
-}
+    private void newFoodGenerator(Food food){
+        boolean bool;
+       do{
+            bool = false;
+            food.foodLocation();
+            for (int i = 0;i<foodList.size();i++) {
+                if (i == foodList.indexOf(food))
+                    continue;
+                if (foodList.get(i).getX() == food.getX() && foodList.get(i).getY() == food.getY()){
+                    bool = true;
+                }
+            }
+        } while(bool);
+    }
 
+
+    public static Snake getSnake() {
+        return snake;
+    }
+    public static void setSnake(Snake sn) {
+        snake = sn;
+    }
+    public static ArrayList<Food> getFoodList() {
+        return foodList;
+    }
+    public void setFoodList(ArrayList<Food> newList) {
+        foodList = newList;
+    }
+}

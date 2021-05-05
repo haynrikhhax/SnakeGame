@@ -1,24 +1,38 @@
 package SnakeGame;
-import java.awt.*;
-import java.util.*;
+
+import java.awt.Rectangle;
+import java.util.ArrayList;
 
 public class Snake {
     ArrayList<Rectangle> snakeBody = new ArrayList<>();
-    private int cubeSize = Board.size;
+    private final int cubeSize = Board.size;
 
-    public String move = "";
+
+
+    private int speed = 150;
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+
+    public String move = "down";
 
     public Snake() {
-        Rectangle temp = new Rectangle(0, 0,cubeSize,cubeSize);
+        Rectangle temp = new Rectangle(3*cubeSize, cubeSize, cubeSize, cubeSize);
         snakeBody.add(temp);
 
-        temp = new Rectangle(cubeSize, 0, cubeSize, cubeSize);
+        temp = new Rectangle(2*cubeSize, cubeSize, cubeSize, cubeSize);
         snakeBody.add(temp);
 
-        temp = new Rectangle(2*cubeSize, 0, cubeSize, cubeSize);
+        temp = new Rectangle(cubeSize, cubeSize, cubeSize, cubeSize);
         snakeBody.add(temp);
 
-        temp = new Rectangle(3*cubeSize, 0, cubeSize, cubeSize);
+        temp = new Rectangle(0, cubeSize,cubeSize,cubeSize);
         snakeBody.add(temp);
         }
 
@@ -59,7 +73,7 @@ public class Snake {
     public void setSnakeBody(ArrayList<Rectangle> snakeBody) {
         this.snakeBody = snakeBody;
     }
-    public  void setMove(String move) {
+    public void setMove(String move) {
         this.move = move;
     }
 

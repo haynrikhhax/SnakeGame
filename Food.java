@@ -1,26 +1,23 @@
 package SnakeGame;
-import java.awt.*;
 
-public class Food {
+import java.awt.Rectangle;
+import java.awt.Color;
+
+public abstract class Food {
     private int x;
     private int y;
 
-    public Food(Snake player) {
-        this.foodLocation(player);
+    public Food() {
+        this.foodLocation();
     }
-
-    public void foodLocation(Snake player) {
-        do{
+    public void foodLocation() {
             x = (int)(Math.random() * Board.width/Board.size - 1) * Board.size;
             y = (int)(Math.random() * Board.width/Board.size - 1) * Board.size;
-            for(Rectangle r : player.getSnakeBody()){
-                if(r.x != x && r.y != y && (x !=0 || y != 0)) {
-                    return;
-                }
-            }
-        }while (true);
     }
-
+    public void functionality(Snake sn){ }
+    public Color getColor(){
+        return Color.black;
+    }
 
     //accessors
     public int getX() {
