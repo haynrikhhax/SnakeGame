@@ -3,8 +3,8 @@ package SnakeGame;
 import java.awt.Color;
 
 public class SlowFood extends Food{
-    public SlowFood() {
-        super();
+    public SlowFood(Snake snake) {
+        super(snake);
     }
     public void functionality(Snake sn) {
         sn.setSpeed(sn.getSpeed()+10);

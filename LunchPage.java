@@ -11,7 +11,6 @@ public class LunchPage extends JFrame implements ActionListener {
     JButton instructions = new JButton("Instructions");
     JButton buttonExit = new JButton("Exit");
     LunchPage(){
-
         label.setBounds(190, 50, 200, 40);
         label.setForeground(new Color(115, 0, 180));
         label.setSize(300, 50);
@@ -71,7 +70,6 @@ public class LunchPage extends JFrame implements ActionListener {
             new Thread(){
                 @Override
                 public void run(){
-                    Game.resetFood();
                     new Game();
                 }
             }.start(); this.dispose();

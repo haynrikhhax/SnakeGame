@@ -1,21 +1,22 @@
 package SnakeGame;
 
 import javax.swing.*;
-import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GameOverPage extends JFrame implements ActionListener {
-    JLabel scoreText = new JLabel("Your final score is: "  + Game.getSnake().snakeBody.size());
+    JLabel scoreText = new JLabel();
     JButton buttonRestart = new JButton("Restart");
     JButton button = new JButton("Back to main menu");
     JButton buttonExit = new JButton("Exit");
+    private Board board;
     private ActionEvent e;
 
     GameOverPage() {
-
+        this.board = new Board();
         this.setTitle("Snake");
+        scoreText.setText("Your final score is: "  + board.getSnake().getSnakeBody().size());
         scoreText.setBounds(175, 100, 300, 40);
         scoreText.setForeground(new Color(2, 100, 100));
         scoreText.setSize(300, 50);
@@ -56,7 +57,7 @@ public class GameOverPage extends JFrame implements ActionListener {
         button.setHorizontalTextPosition(JButton.LEFT);
         button.setIcon(menuGame);
 
-
+        this.setTitle("Snake");
         this.add(button);
         this.add(buttonExit);
         this.add(buttonRestart);
@@ -74,7 +75,6 @@ public class GameOverPage extends JFrame implements ActionListener {
             new Thread(){
                 @Override
                 public void run(){
-                    Game.resetFood();
                     new Game();
                 }
             }.start(); this.dispose();

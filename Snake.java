@@ -6,19 +6,7 @@ import java.util.ArrayList;
 public class Snake {
     ArrayList<Rectangle> snakeBody = new ArrayList<>();
     private final int cubeSize = Board.size;
-
-
-
     private int speed = 150;
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
 
     public String move = "down";
 
@@ -90,4 +78,11 @@ public class Snake {
         move = "right";
     }
 
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
 }

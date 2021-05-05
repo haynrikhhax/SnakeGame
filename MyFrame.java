@@ -5,11 +5,11 @@ import javax.swing.ImageIcon;
 import java.awt.Container;
 
 public class MyFrame extends JFrame{
-    MyFrame(){
-        Container c = new SnakeGame.Board();
+    MyFrame(Board br){
+        Container c = br;
         this.setContentPane(c);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ImageIcon image = new ImageIcon("SnakeGame\\snake.png");
+        ImageIcon image = new ImageIcon("C:\\Users\\Robert\\IdeaProjects\\SnakeGame\\src\\snake.png");
         this.setIconImage(image.getImage());
         this.setTitle("Snake");
         this.pack();

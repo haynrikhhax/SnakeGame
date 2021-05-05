@@ -19,9 +19,6 @@ public class InstructionsPage extends JFrame implements ActionListener {
     JLabel size = new JLabel();
     JLabel speed = new JLabel();
     JLabel speedCont = new JLabel();
-    JLabel medium = new JLabel();
-    JLabel hard = new JLabel();
-    JLabel hardCont = new JLabel();
     JButton button = new JButton("Back to main menu");
     JButton startButton = new JButton("Start the game");
 
@@ -97,7 +94,7 @@ public class InstructionsPage extends JFrame implements ActionListener {
         blue.setFont(new Font("MV Boil", Font.BOLD, 15));
         this.add(blue);
 
-        size.setText("If the snake size reaches 1 you loose. Remember overtime the board will be filled with red dots");
+        size.setText("If the snake size reaches 2 you loose. Remember overtime the board will be filled with red dots");
         size.setBounds(25, 300, 800, 25);
         size.setForeground(Color.BLACK);
         size.setSize(800, 25);
@@ -117,27 +114,6 @@ public class InstructionsPage extends JFrame implements ActionListener {
         speedCont.setSize(400, 25);
         speedCont.setFont(new Font("MV Boil", Font.BOLD, 15));
         this.add(speedCont);
-
-        medium.setText("* If you chose medium mode from the Game Modes menu the game will become harder and touching the walls will kill you");
-        medium.setBounds(15, 400, 900, 25);
-        medium.setForeground(Color.BLACK);
-        medium.setSize(900, 25);
-        medium.setFont(new Font("MV Boil", Font.BOLD, 15));
-        this.add(medium);
-
-        hard.setText("* If you chose hard mode from the Game Modes menu the game will become more harder besides the walls killing you");
-        hard.setBounds(15, 425, 900, 25);
-        hard.setForeground(Color.BLACK);
-        hard.setSize(900, 25);
-        hard.setFont(new Font("MV Boil", Font.BOLD, 15));
-        this.add(hard);
-
-        hardCont.setText("now your snake is almost at max speed and eating yellow fruit is almost deadly");
-        hardCont.setBounds(25, 450, 900, 25);
-        hardCont.setForeground(Color.BLACK);
-        hardCont.setSize(900, 25);
-        hardCont.setFont(new Font("MV Boil", Font.BOLD, 15));
-        this.add(hardCont);
 
 
 
@@ -180,7 +156,6 @@ public class InstructionsPage extends JFrame implements ActionListener {
             new Thread(){
                 @Override
                 public void run(){
-                    Game.resetFood();
                     new Game();
                 }
             }.start(); this.dispose();
