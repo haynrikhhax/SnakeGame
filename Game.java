@@ -44,7 +44,7 @@ public class Game {
             /*if snake touches itself, get too small or exceed
             the speed limit the game will be over*/
             if (touchItself() || board.getSnake().snakeBody.size() < 3 || board.getSnake().getSpeed() < 30){
-                new GameOverPage();
+                new GameOverPage(board.getSnake().snakeBody.size());
                 myFrame.dispose();
                 break;
             }

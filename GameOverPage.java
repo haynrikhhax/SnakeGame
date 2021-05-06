@@ -7,21 +7,28 @@ import java.awt.event.ActionListener;
 
 public class GameOverPage extends JFrame implements ActionListener {
     JLabel scoreText = new JLabel();
+    JLabel gameOverText = new JLabel();
     JButton buttonRestart = new JButton("Restart");
     JButton button = new JButton("Back to main menu");
     JButton buttonExit = new JButton("Exit");
     private Board board;
     private ActionEvent e;
-
-    GameOverPage() {
+    GameOverPage(int number) {
         this.board = new Board();
         this.setTitle("Snake");
-        scoreText.setText("Your final score is: "  + board.getSnake().getSnakeBody().size());
+        scoreText.setText("Your final score is: " + number);
         scoreText.setBounds(175, 100, 300, 40);
         scoreText.setForeground(new Color(2, 100, 100));
         scoreText.setSize(300, 50);
         scoreText.setFont(new Font("MV Boil", Font.BOLD, 25));
         this.add(scoreText);
+
+        gameOverText.setText("Game Over");
+        gameOverText.setBounds(220, 50, 300, 40);
+        gameOverText.setForeground(new Color(255, 0, 0));
+        gameOverText.setSize(300, 50);
+        gameOverText.setFont(new Font("MV Boil", Font.BOLD, 30));
+        this.add(gameOverText);
 
         buttonRestart.setBounds(200, 200, 200, 40);
         buttonRestart.setFocusable(false);
