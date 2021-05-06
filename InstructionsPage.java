@@ -23,98 +23,36 @@ public class InstructionsPage extends JFrame implements ActionListener {
     JButton startButton = new JButton("Start the game");
 
     InstructionsPage(){
+        String[] stringArr = {"To move the snake use the arrow keys","When you press up arrow or W the snake goes up",
+                "When you press down arrow or S the snake goes down", "When you press left arrow or A the snake goes left",
+                "When you press right arrow or D the snake goes right", "In this game there are 4 types of food",
+                "When You see a green dot on the board try to eat it. It makes you grow bigger",
+                "When You see a red dot on the board try to avoid eating it. It is poisonous and will remove one of snake's body parts",
+                "When You see a yellow dot on the board you can either eat it or leave it as is. It makes your snake go faster. Déjà vu",
+                "When You see a blue dot on the board you can either eat it or leave it as is. It makes your snake go slower",
+                "If the snake size reaches 2 you loose. Remember overtime the board will be filled with red dots",
+                "If the snake becomes very fast be cautious because if the snake reaches max speed and you eat one more",
+                "yellow fruit you will loose"};
+        JLabel[] arr = {move, up, down, left, right, foodTypes, green, red, yellow, blue, size, speed, speedCont};
 
-        move.setText("To move the snake use the arrow keys");
-        move.setBounds(25, 25, 400, 25);
-        move.setForeground(Color.BLACK);
-        move.setSize(400, 25);
+        for (int i = 0; i < arr.length; i++) {
+
+            arr[i].setBounds(25, 25*(i+1), 850, 25);
+            arr[i].setText(stringArr[i]);
+            arr[i].setForeground(Color.BLACK);
+            arr[i].setSize(850, 25);
+            arr[i].setFont(new Font("MV Boil", Font.BOLD, 15));
+            this.add(arr[i]);
+        }
+
         move.setFont(new Font("MV Boil", Font.BOLD, 20));
-        this.add(move);
-
-        up.setText("When you press up arrow the snake goes up");
-        up.setBounds(25, 50, 350, 25);
-        up.setForeground(Color.BLACK);
-        up.setSize(350, 25);
-        up.setFont(new Font("MV Boil", Font.BOLD, 15));
-        this.add(up);
-
-        down.setText("When you press down arrow the snake goes down");
-        down.setBounds(25, 75, 370, 25);
-        down.setForeground(Color.BLACK);
-        down.setSize(370, 25);
-        down.setFont(new Font("MV Boil", Font.BOLD, 15));
-        this.add(down);
-
-        left.setText("When you press left arrow the snake goes left");
-        left.setBounds(25, 100, 350, 25);
-        left.setForeground(Color.BLACK);
-        left.setSize(350, 25);
-        left.setFont(new Font("MV Boil", Font.BOLD, 15));
-        this.add(left);
-
-        right.setText("When you press right arrow the snake goes right");
-        right.setBounds(25, 125, 350, 25);
-        right.setForeground(Color.BLACK);
-        right.setSize(350, 25);
-        right.setFont(new Font("MV Boil", Font.BOLD, 15));
-        this.add(right);
-
-        foodTypes.setText("In this game there are 4 types of food");
-        foodTypes.setBounds(25, 175, 400, 25);
-        foodTypes.setForeground(Color.BLACK);
-        foodTypes.setSize(400, 25);
         foodTypes.setFont(new Font("MV Boil", Font.BOLD, 20));
-        this.add(foodTypes);
 
-        green.setText("When You see a green dot on the board try to eat it. It makes you grow bigger");
-        green.setBounds(25, 200, 700, 25);
+
         green.setForeground(Color.GREEN);
-        green.setSize(700, 25);
-        green.setFont(new Font("MV Boil", Font.BOLD, 15));
-        this.add(green);
-
-        red.setText("When You see a red dot on the board try to avoid eating it. It is poisonous and will remove one of snake's body parts");
-        red.setBounds(25, 225, 850, 25);
         red.setForeground(Color.RED);
-        red.setSize(850, 25);
-        red.setFont(new Font("MV Boil", Font.BOLD, 15));
-        this.add(red);
-
-        yellow.setText("When You see a yellow dot on the board you can either eat it or leave it as is. It makes your snake go faster. Déjà vu");
-        yellow.setBounds(25, 250, 850, 25);
         yellow.setForeground(Color.YELLOW);
-        yellow.setSize(850, 25);
-        yellow.setFont(new Font("MV Boil", Font.BOLD, 15));
-        this.add(yellow);
-
-        blue.setText("When You see a blue dot on the board you can either eat it or leave it as is. It makes your snake go slower");
-        blue.setBounds(25, 275, 800, 25);
         blue.setForeground(Color.BLUE);
-        blue.setSize(800, 25);
-        blue.setFont(new Font("MV Boil", Font.BOLD, 15));
-        this.add(blue);
-
-        size.setText("If the snake size reaches 2 you loose. Remember overtime the board will be filled with red dots");
-        size.setBounds(25, 300, 800, 25);
-        size.setForeground(Color.BLACK);
-        size.setSize(800, 25);
-        size.setFont(new Font("MV Boil", Font.BOLD, 15));
-        this.add(size);
-
-        speed.setText("If the snake becomes very fast be cautious because if the snake reaches max speed and you eat one more");
-        speed.setBounds(25, 325, 800, 25);
-        speed.setForeground(Color.BLACK);
-        speed.setSize(800, 25);
-        speed.setFont(new Font("MV Boil", Font.BOLD, 15));
-        this.add(speed);
-
-        speedCont.setText("yellow fruit you will loose");
-        speedCont.setBounds(25, 350, 400, 25);
-        speedCont.setForeground(Color.BLACK);
-        speedCont.setSize(400, 25);
-        speedCont.setFont(new Font("MV Boil", Font.BOLD, 15));
-        this.add(speedCont);
-
 
 
         ImageIcon buttonGame = new ImageIcon("SnakeGame\\menu.png");
@@ -123,7 +61,7 @@ public class InstructionsPage extends JFrame implements ActionListener {
         buttonGame = new ImageIcon(modifiedButton);
         button.setHorizontalTextPosition(JButton.LEFT);
         button.setIcon(buttonGame);
-        button.setBounds(250, 660, 200, 40);
+        button.setBounds(250, 460, 200, 40);
         button.setFocusable(false);
         button.addActionListener(this);
         this.add(button);
@@ -134,13 +72,13 @@ public class InstructionsPage extends JFrame implements ActionListener {
         startGame = new ImageIcon(modifiedStart);
         startButton.setHorizontalTextPosition(JButton.LEFT);
         startButton.setIcon(startGame);
-        startButton.setBounds(470, 660, 200, 40);
+        startButton.setBounds(470, 460, 200, 40);
         startButton.setFocusable(false);
         startButton.addActionListener(this);
         this.add(startButton);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1000,800);
+        this.setSize(1000,600);
         ImageIcon image = new ImageIcon("SnakeGame\\snake.png");
         this.setIconImage(image.getImage());
         this.setTitle("Snake");
